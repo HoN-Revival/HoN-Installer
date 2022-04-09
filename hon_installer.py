@@ -75,6 +75,7 @@ def install(architecture, target_version, path):
 
  
 versions_32 = [
+    "0.3.3",
     "1.0.0.1",
     "1.0.1",
     "1.0.2",
