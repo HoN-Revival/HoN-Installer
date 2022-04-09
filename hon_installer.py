@@ -58,8 +58,41 @@ def copy_files(architecture, path, target_version):
           target_file = os.path.join(root, file)
           print('Copying: ' + target_file + ' to ' + target_path, flush=True)
           shutil.copy(target_file, target_path)
-        
+      shutil.rmtree(dir_path)
+          
   print('Copying complete', flush=True)
+
+def zipdir(path, zf):
+  cwd = os.getcwd()
+  os.chdir(path)
+  for root, dirs, files in os.walk('.'):
+    for file in files:
+      zf.write(os.path.join(root, file), 
+               os.path.relpath(os.path.join(root, file), os.path.join(path, '..')))
+  os.chdir(cwd)
+
+def archive_files(path):
+  processed = []
+  cwd = os.getcwd()
+  for root, dirs, files in os.walk(path):
+    for dir in dirs:
+      dir_path = os.path.join(root, dir)
+      if not dir_path.endswith('.s2z'):
+        continue
+      if dir_path in processed:
+        continue
+      split = os.path.split(dir_path)
+      parent_dir = split[0]
+      dir_name = split[1]
+      os.chdir(parent_dir)
+      processed.append(dir_path)
+      print(f'Zipping {os.path.split(parent_dir)[1] + "/" + dir_name}', flush=True)
+      with zipfile.ZipFile(dir_name + '.zip', 'w', zipfile.ZIP_DEFLATED) as zf:
+        zipdir(dir_name, zf)
+        shutil.rmtree(dir_name)
+      os.rename(dir_name + '.zip', dir_name)  
+  os.chdir(cwd)
+  print('\nArchiving complete', flush=True)
 
 def install(architecture, target_version, path):
   print('\n\n==================== Downloading files ====================', flush=True)
@@ -68,6 +101,8 @@ def install(architecture, target_version, path):
   extract_all(architecture)
   print('\n\n==================== Installing files ====================', flush=True)
   copy_files(architecture, path, target_version)
+  print('\n\n==================== Archiving files ====================', flush=True)
+  archive_files(path)
   print('\n\n===========================================================', flush=True)
   print('==================== Install Complete! ====================', flush=True)
   print('===========================================================', flush=True)
