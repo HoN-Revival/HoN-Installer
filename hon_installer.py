@@ -8,8 +8,8 @@ import zipfile
 HON_64_PATH = 'C:\Program Files\Heroes of Newerth x64'
 HON_32_PATH = 'C:\Program Files (x86)\Heroes of Newerth'
 
-GDRIVE_32_BIT_ID = '1xTq9CLaZpuunZU3Dr3MtpU8gUwEnSI15'
-GDRIVE_64_BIT_ID = '16CUMIiT-U1JJfmXSNl7UFPNSe0ZcvW-y'
+GDRIVE_32_BIT_ID = '<fill_in_the_blank>'
+GDRIVE_64_BIT_ID = '<fill_in_the_blank>'
 
 architecture_options = [
     "32-Bit (i686)",
