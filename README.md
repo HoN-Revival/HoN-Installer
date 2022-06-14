@@ -6,7 +6,9 @@ A custom installer using backed-up files for HoN that will still work after the 
 
 ## How to install
 
-TODO
+1. Populate the following values: `GDRIVE_32_BIT_ID ` and `GDRIVE_64_BIT_ID` with IDs to google drive folders containing the backups.
+
+TODO - Complete the instructions.
 
 ## How to uninstall
 
@@ -15,10 +17,9 @@ This script does not touch the registry or anything like that. To uninstall, sim
 
 ## Design
 
-The install files are stored in https://drive.google.com/drive/u/0/folders/1zZ0iSXaNF8tuGKxhpABZAKiXrLm2jIZN.
-(They were backed up using https://github.com/mrhappyasthma/hon-client-scraper).
+The install files should be stored on GoogleDrive. They can be backed up using the official CDNs (e.g. using https://github.com/mrhappyasthma/hon-client-scraper).
 
-Install files are primarly kept as delta-packages. In other words, a given update only contains the new files since the last update stored in the repo.
+Install files should be kept as delta-packages. In other words, a given update only contains the new files since the last update stored in the repo.
 For example, update `4.9.5.zip` only contains the new files since the `4.9.4.zip`.
 
 The benefit is that this dramatically decreases the size of each update and allows applying each directory in-order up to the target installation version.
