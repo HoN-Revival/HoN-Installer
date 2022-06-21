@@ -1,4 +1,4 @@
-# HoN-Installer
+# HoN-Installer [NOTE: This project is not funcitonal yet.]
 
 A custom installer using backed-up files for HoN that will still work after the servers go offline.
 
